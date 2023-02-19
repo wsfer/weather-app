@@ -75,7 +75,7 @@ class DOMManager {
             this.#temperature.style.color = tempColors[9];
         }
         this.#description.textContent = data.weather[0].description;
-        this.#time.textContent = `${time.getHours()}:${time.getMinutes()}`;
+        this.#time.textContent = ` ${time.getHours()}:${time.getMinutes()}`;
     }
 
     #updateAdditionalWeather(data) {

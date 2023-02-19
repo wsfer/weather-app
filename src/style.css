@@ -27,6 +27,70 @@ header {
     background-color: rgba(217, 217, 217, 0.2);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    padding: 1rem 2rem;
+}
+
+#title-box {
+    display: flex;
+    align-items: center;
+}
+
+#title-box > svg {
+    margin-right: 0 1rem;
+    width: 2.5rem;
+}
+
+#title-box > svg > path {
+    fill: #d9d9d9;
+}
+
+#search-box {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-self: center;
+}
+
+#search-box > .input-container {
+    position: relative;
+}
+
+#search-box svg {
+    position: absolute;
+    top: 0;
+    left: 0.25rem;
+    height: 100%;
+}
+
+#search-box input {
+    padding: 0.5rem 0 0.5rem 3rem;
+    color: rgba(55, 55, 55);;
+    background-color: rgb(217, 217, 217);
+    border: none;
+    border-radius: 1rem 0 0 1rem;
+    width: 100%;
+}
+
+#search-box > button {
+    border: none;
+    background-color: rgba(55, 55, 55);
+    padding: 0 2rem;
+    font-weight: bold;
+    border-radius: 0 1rem 1rem 0;
+}
+
+#menu-box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+#menu-box button {
+    background-color: transparent;
+    border: none;
+}
+
+#menu-box svg{
+    height: 2.5rem;
 }
 
 #main-information {
@@ -37,7 +101,7 @@ header {
         "desc desc"
         "updt updt";
     grid-template-columns: 1fr 1fr;
-    margin-top: 5rem;
+    margin-top: 7rem;
 }
 
 #main-information > * {
@@ -83,4 +147,28 @@ header {
 #additional-information > div > div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+#additional-information > div > div > span:first-child {
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+}
+
+#additional-information svg {
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+#additional-information .wind > .wind-direction {
+    margin-right: 0;
+}
+
+#additional-information path {
+    fill: #d9d9d9;
+}
+
+.max-min {
+    font-size: 0.7rem;
 }
