@@ -5,3 +5,38 @@
     outline: 1px solid red;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#main-information {
+    display: grid;
+    grid-template-areas: 
+        "city city"
+        "icon temp"
+        "desc desc"
+        "updt updt";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr 1fr;
+    margin-top: 2rem;
+}
+
+#additional-information {
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#additional-information > div > div {
+    display: flex;
+    justify-content: space-between;
+}
