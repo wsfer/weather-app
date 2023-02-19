@@ -116,7 +116,17 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _weather_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather-api.js */ \"./src/weather-api.js\");\n\n\n\nnavigator.geolocation.getCurrentPosition((data) => {\n    const lat = data.coords.latitude;\n    const lon = data.coords.longitude;\n    _weather_api_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].getWeatherData(lat, lon)\n        .then((inf) => {\n            console.log(inf);\n        });\n});\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/weather-api.js":
+/*!****************************!*\
+  !*** ./src/weather-api.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass WeatherAPI {\n    #key;\n    constructor(key) {\n        this.#key = key;\n    }\n    \n    async getWeatherData(lat, lon) {\n        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this.#key}`);\n        const data = await response.json();\n        return data;\n    }\n\n    async getForecastData(lat, lon) {\n        const response = await fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.#key}`);\n        const data = await response.json();\n        return data;\n    }\n\n    async getCityLocation(cityName) {\n        const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${this.#key}`);\n        const data = await response.json();\n        return data;\n    }\n\n}\n\nconst weatherAPI = new WeatherAPI('53adf48f9adafdb91a2ae308a53f4cbd');\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (weatherAPI);\n\n//# sourceURL=webpack://weather-app/./src/weather-api.js?");
 
 /***/ })
 
