@@ -4,14 +4,14 @@ class WeatherAPI {
         this.#key = key;
     }
     
-    async getWeatherData(lat, lon) {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this.#key}`);
+    async getCurrentWeather(lat, lon) {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${this.#key}`);
         const data = await response.json();
         return data;
     }
 
-    async getForecastData(lat, lon) {
-        const response = await fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.#key}`);
+    async getForecast(lat, lon) {
+        const response = await fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${this.#key}`);
         const data = await response.json();
         return data;
     }

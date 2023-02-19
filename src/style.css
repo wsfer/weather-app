@@ -10,6 +10,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-size: 100% 100%;
+    background-position: center;
 }
 
 header {
@@ -27,6 +29,30 @@ header {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 2fr 1fr 1fr;
     margin-top: 2rem;
+}
+
+#main-information > .location {
+    grid-area: city;
+    text-align: center;
+}
+
+#main-information > .icon {
+    grid-area: icon;
+}
+
+#main-information > .temperature {
+    grid-area: temp;
+    text-align: center;
+}
+
+#main-information > .description {
+    grid-area: desc;
+    text-align: center;
+}
+
+#main-information > .update-time {
+    grid-area: updt;
+    text-align: center;
 }
 
 #additional-information {
