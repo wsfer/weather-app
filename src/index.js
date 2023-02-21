@@ -7,4 +7,7 @@ navigator.geolocation.getCurrentPosition((location) => {
     const lon = location.coords.longitude;
     const response = WeatherAPI.getCurrentWeather(lat, lon);
     response.then((data) => DOMManager.updateWeatherData(data));
+    setTimeout(() => {
+        WeatherAPI.getForecast(lat, lon).then((data) => DOMManager.updateForecastData(data));
+    }, 1200);
 });

@@ -11,13 +11,13 @@ class WeatherAPI {
     }
 
     async getForecast(lat, lon) {
-        const response = await fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${this.#key}`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${this.#key}`);
         const data = await response.json();
         return data;
     }
 
     async getCityLocation(cityName) {
-        const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${this.#key}`);
+        const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${this.#key}`);
         const data = await response.json();
         return data;
     }

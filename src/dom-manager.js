@@ -16,6 +16,10 @@ class DOMManager {
     #rainContainer;
     #snow;
     #snowContainer;
+    #backgroundLegend;
+    #forecastContainer;
+    #forecastControls;
+    #range;
     constructor() {
         this.#location = document.querySelector('.location');
         this.#icon = document.querySelector('.icon');
@@ -35,12 +39,28 @@ class DOMManager {
         this.#rainContainer = document.querySelector('#rain-container');
         this.#snow = document.querySelector('.snow');
         this.#snowContainer = document.querySelector('#snow-container');
+        this.#backgroundLegend = document.querySelector('#background-legend');
+        this.#forecastContainer = document.querySelector('#forecast-container');
+        this.#forecastControls = document.querySelector('#forecast-controls');
+        this.#range = new Range();
     }
 
     updateWeatherData(data) {
         this.#updateMainWeather(data);
         this.#updateBackgroundImage(data.weather[0].main, data.main.temp);
         this.#updateAdditionalWeather(data);
+    }
+
+    updateForecastData(data) {
+        const forecastFrag = document.createDocumentFragment();
+        const controlFrag = document.createDocumentFragment();
+        data.list.map((obj) => this.#createForecastBox(obj)).forEach((element) => {
+            forecastFrag.appendChild(element);
+            const btn = document.createElement('button');
+            controlFrag.appendChild(btn);
+        });
+        this.#forecastContainer.appendChild(forecastFrag);
+        this.#forecastControls.appendChild(controlFrag);
         console.log(data);
     }
 
@@ -108,6 +128,7 @@ class DOMManager {
 
     #updateBackgroundImage(weather, temp) {
         let image;
+        let legend;
         if (temp >= 35) {
             image = 'url(background-images/sun.jpg)';
         } else if (temp <= -16) {
@@ -138,6 +159,19 @@ class DOMManager {
             }
         }
         document.querySelector('main').style.backgroundImage = image;
+        this.#backgroundLegend.textContent = 'a';
+    }
+
+    #createForecastBox(dataObj) {
+        const time = new Date(dataObj.dt * 1000);
+        const dayOfWeek = ['Sun.','Mon.','Tues.','Wed.','Thurs.','Fri.','Sat.'][time.getDay()];
+        return this.#range.createContextualFragment(
+            `<div class="forecast-content">
+                <h4 class="forecast-time">${dayOfWeek} ${time.getDate()}, ${time.getHours()}:${time.getMinutes()}</h4>
+                <img src="http://openweathermap.org/img/wn/${dataObj.weather[0].icon}@2x.png" alt="${dataObj.weather[0].description}" class="forecast-icon">
+                <p class="forecast-temperature">${Math.round(dataObj.main.temp)}ºC</p>
+                <p class="forecast-description">${dataObj.weather[0].description}</p>
+            </div>`);
     }
 }
 
