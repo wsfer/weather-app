@@ -56,12 +56,19 @@ class DOMManager {
         const controlFrag = document.createDocumentFragment();
         data.list.map((obj) => this.#createForecastBox(obj)).forEach((element) => {
             forecastFrag.appendChild(element);
+        });
+        for(let i=1; i<=forecastFrag.childElementCount/5; i++) {
             const btn = document.createElement('button');
             controlFrag.appendChild(btn);
-        });
+        }
         this.#forecastContainer.appendChild(forecastFrag);
         this.#forecastControls.appendChild(controlFrag);
-        console.log(data);
+        return [
+            document.querySelector('#next'),
+            document.querySelector('#previous'),
+            this.#forecastControls.querySelectorAll('button'),
+            document.querySelector('#forecast-container')
+        ]; //used outside, on forecast carousel class creation
     }
 
     #updateMainWeather(data) {
