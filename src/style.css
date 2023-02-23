@@ -165,16 +165,8 @@ header {
     margin-right: 0.5rem;
 }
 
-#additional-information .wind > .wind-direction {
-    margin-right: 0;
-}
-
 #additional-information path {
     fill: #d9d9d9;
-}
-
-.max-min {
-    font-size: 0.7rem;
 }
 
 #forecast-information {
@@ -184,25 +176,42 @@ header {
     position: relative;
 }
 
-#forecast-carousel > button {
-    position: absolute;
-    top: 50%;
-    width: 2rem;
+#forecast-carousel {
+    display: grid;
+    grid-template-areas: "previous   slider   next"
+                         "    .     controls    . ";
+    grid-template-columns: 2rem calc(100% - 4rem) 2rem;
+}
+
+#forecast-carousel > #next {
+    grid-area: next;
+    background-color: transparent;
     border: none;
 }
 
-#next {
-    right: 0;
+#forecast-carousel > #previous {
+    grid-area: previous;
+    background-color: transparent;
+    border: none;
 }
 
-#previous {
-    left: 0;
+#forecast-carousel > button > svg > path{
+    fill: #d9d9d9;
 }
 
-.forecast-slider {
+#forecast-carousel > #forecast-slider {
+    grid-area: slider;
     overflow: hidden;
-    margin-left: 2rem;
-    padding: 2rem 0;
+    padding: 1rem 0;
+}
+
+#forecast-carousel > #forecast-controls {
+    grid-area: controls;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 #forecast-container {
@@ -213,6 +222,7 @@ header {
 }
 
 .forecast-content {
+    padding: 2rem 0;
     margin-right: 2rem;
     flex-shrink: 0;
     display: flex;
@@ -222,15 +232,6 @@ header {
     width: calc(15vw - 2rem);
 }
 
-#forecast-controls {
-    margin: 1rem 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
 #forecast-controls > button {
     flex-shrink: 0;
     border: none;
@@ -238,4 +239,8 @@ header {
     width: 2rem;
     height: 1rem;
     background-color: rgba(217, 217, 217, 0.2);
+}
+
+#background-legend {
+    opacity: 0.5;
 }

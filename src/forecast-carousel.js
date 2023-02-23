@@ -15,13 +15,13 @@ class ForecastCarousel {
     constructor(nextBtn, previousBtn, controls, carousel) {
         this.#index = 0;
         this.#carousel = carousel;
-        this.#controls = controls; //This reference is needed for #next and #previous methods
-        controls[0].style.backgroundColor = 'rgba(217, 217, 217, 0.6)';
+        this.#controls = controls.querySelectorAll('button'); //This reference is needed for #next and #previous methods
+        this.#controls[0].style.backgroundColor = 'rgba(217, 217, 217, 0.6)';
 
         nextBtn.addEventListener('click', () => this.#next());
         previousBtn.addEventListener('click', () => this.#previous());
 
-        controls.forEach((btn, index) => {
+        this.#controls.forEach((btn, index) => {
             btn.addEventListener('click', (e) => {
                 this.#controls[this.#controlIndex()].style.backgroundColor = 'rgba(217, 217, 217, 0.2)'; //Clear current control selected style
                 this.#index = index*5;
@@ -41,7 +41,6 @@ class ForecastCarousel {
             this.#index++;
             this.#carousel.style.right = `${15*this.#index}vw`;
             if(this.#index % 5 == 0) { //this will track the control index to toggle button color
-                console.log(this.#controls[this.#controlIndex()]);
                 this.#controls[this.#controlIndex()-1].style.backgroundColor = 'rgba(217, 217, 217, 0.2)';
                 this.#controls[this.#controlIndex()].style.backgroundColor = 'rgba(217, 217, 217, 0.6)';
             }
@@ -53,7 +52,6 @@ class ForecastCarousel {
             this.#index--;
             this.#carousel.style.right = `${15*this.#index}vw`;
             if(this.#index % 5 == 4) { //this will track the control index to toggle button color
-                console.log(this.#controls[this.#controlIndex()]);
                 this.#controls[this.#controlIndex()+1].style.backgroundColor = 'rgba(217, 217, 217, 0.2)';
                 this.#controls[this.#controlIndex()].style.backgroundColor = 'rgba(217, 217, 217, 0.6)';
             }
