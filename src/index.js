@@ -15,6 +15,9 @@ navigator.geolocation.getCurrentPosition((location) => {
     setTimeout(() => {
         WeatherAPI.getForecast(lat, lon)
             .then((data) => DOMManager.updateForecastData(data))
-            .then((carousel) => forecastCarousel = new ForecastCarousel(...carousel));
+            .then((carousel) => forecastCarousel = new ForecastCarousel(...carousel))
+            .then(() => {
+                document.querySelector('#loading').style.height = '0';
+            });
     }, 1200);
 });

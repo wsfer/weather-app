@@ -243,4 +243,41 @@ header {
 
 #background-legend {
     opacity: 0.5;
+    margin: 2rem 0;
+}
+
+#loading {
+    position: fixed;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: height 0.5s ease-in;
+    background-color: #f7f6bc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#loading p {
+    color: rgb(37, 37, 37);
+    text-align: center;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+/* While I don't learn doing it myself: 
+   https://www.w3schools.com/howto/howto_css_loader.asp */
+.loader {
+    border: 16px solid #f7f6bc;
+    border-top: 16px solid rgb(37, 37, 37);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
