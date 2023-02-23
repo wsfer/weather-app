@@ -269,7 +269,7 @@ header {
 /* While I don't learn doing it myself: 
    https://www.w3schools.com/howto/howto_css_loader.asp */
 .loader {
-    border: 16px solid #f7f6bc;
+    border: 16px solid #d9d9d9;
     border-top: 16px solid rgb(37, 37, 37);
     border-radius: 50%;
     width: 120px;
