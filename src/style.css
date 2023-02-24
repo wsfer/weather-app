@@ -28,15 +28,16 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 1rem 2rem;
+    transition: background-color 0.5s ease-in-out;
 }
 
 #title-box {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 #title-box > svg {
-    margin-right: 0 2rem;
     width: 2.5rem;
 }
 
@@ -63,11 +64,15 @@ header {
 
 #search-box input {
     padding: 0.5rem 0 0.5rem 3rem;
-    color: rgba(55, 55, 55);;
+    color: rgba(55, 55, 55);
     background-color: rgb(217, 217, 217);
     border: none;
     border-radius: 1rem 0 0 1rem;
     width: 100%;
+}
+
+#search-box input:focus {
+    outline: none;
 }
 
 #search-box > button {
@@ -76,6 +81,7 @@ header {
     padding: 0 2rem;
     font-weight: bold;
     border-radius: 0 1rem 1rem 0;
+    cursor: pointer;
 }
 
 #menu-box {
@@ -185,33 +191,30 @@ header {
 
 #forecast-carousel > #next {
     grid-area: next;
-    background-color: transparent;
-    border: none;
+    border-radius: 0 50% 50% 0;
 }
 
 #forecast-carousel > #previous {
     grid-area: previous;
-    background-color: transparent;
-    border: none;
+    border-radius: 50% 0 0 50%;
+}
+
+#forecast-carousel > button {
+   background-color: rgba(217, 217, 217, 0.6);
+   border: none;
+   height: calc(100% - 2rem);
+   align-self: center;
+   cursor: pointer;
 }
 
 #forecast-carousel > button > svg > path{
-    fill: #d9d9d9;
+    fill: rgba(17, 17, 17, 0.6);
 }
 
 #forecast-carousel > #forecast-slider {
     grid-area: slider;
     overflow: hidden;
     padding: 1rem 0;
-}
-
-#forecast-carousel > #forecast-controls {
-    grid-area: controls;
-    margin: 1rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
 }
 
 #forecast-container {
@@ -232,6 +235,15 @@ header {
     width: calc(15vw - 2rem);
 }
 
+#forecast-carousel > #forecast-controls {
+    grid-area: controls;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 #forecast-controls > button {
     flex-shrink: 0;
     border: none;
@@ -239,6 +251,7 @@ header {
     width: 2rem;
     height: 1rem;
     background-color: rgba(217, 217, 217, 0.2);
+    cursor: pointer;
 }
 
 #background-legend {
@@ -251,19 +264,26 @@ header {
     bottom: 0;
     height: 100vh;
     width: 100vw;
-    transition: height 0.5s ease-in;
-    background-color: #f7f6bc;
+    transition: height 0.5s ease-out;
+    background-color: #d9d9d9;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 }
 
-#loading p {
+#loading p, #loading h2 {
     color: rgb(37, 37, 37);
     text-align: center;
     font-weight: bold;
     padding: 1rem;
+}
+
+#loading > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* While I don't learn doing it myself: 
@@ -271,6 +291,7 @@ header {
 .loader {
     border: 16px solid #d9d9d9;
     border-top: 16px solid rgb(37, 37, 37);
+    border-right: 16px solid rgb(37, 37, 37);
     border-radius: 50%;
     width: 120px;
     height: 120px;

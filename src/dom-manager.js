@@ -6,13 +6,16 @@ class DOMCreator {
 
     createMainSection(data) {
         const time = new Date(data.dt * 1000);
+        const hours = (time.getHours() >= 10) ? (time.getHours()) : ('0' + time.getHours());
+        const minutes = (time.getMinutes() >= 10) ? (time.getMinutes()) : ('0' + time.getMinutes());
+        const description = data.weather[0].description;
 
         const DOMContent = this.#range.createContextualFragment(
             `<h2 class="location">${data.name}, ${(data.state || data.sys.country)}</h2>
              <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}" class="icon">
              <h3 class="temperature" style="color:${this.#getTemperatureColor(data.main.temp)}">${Math.round(data.main.temp)}ºC</h3>
-             <p class="description">${data.weather[0].description}</p>
-             <p class="update-time">Updated at ${time.getHours()}:${time.getMinutes()}</p>`
+             <p class="description">${description[0].toUpperCase() + description.slice(1)}</p>
+             <p class="update-time">Updated at ${hours}:${minutes}</p>`
         );
 
         return DOMContent;
@@ -114,7 +117,7 @@ class DOMCreator {
                         Max/min:
                     </span>
                     <span>
-                        ${data.main.temp_max}º/${data.main.temp_min}º
+                        ${Math.round(data.main.temp_max)}º/${Math.round(data.main.temp_min)}º
                     </span>
                 </div>
                 <div>
@@ -168,7 +171,7 @@ class DOMCreator {
         const DOMContent = this.#range.createContextualFragment(`
             <button id="previous">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M13,22L3,12L13,2V8H21V16H13V22M6,12L11,17V14H19V10H11V7L6,12Z" />
+                    <path d="M20,10V14H11L14.5,17.5L12.08,19.92L4.16,12L12.08,4.08L14.5,6.5L11,10H20Z" />
                 </svg>
             </button>
             <div id="forecast-slider">
@@ -176,7 +179,7 @@ class DOMCreator {
             </div>
             <button id="next">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z" />
+                    <path d="M4,10V14H13L9.5,17.5L11.92,19.92L19.84,12L11.92,4.08L9.5,6.5L13,10H4Z" />
                 </svg>
             </button>
             <div id="forecast-controls">${'<button></button>'.repeat(data.list.length/5)}</div>`
@@ -193,14 +196,16 @@ class DOMCreator {
     
     #createForecastBox(dataObj) {
         const time = new Date(dataObj.dt * 1000);
-        const hours = (time.getHours().length == 1) ? ('0' + time.getHours()) : time.getHours();
+        const hours = (time.getHours() >= 10) ? (time.getHours()) : ('0' + time.getHours());
         const dayOfWeek = ['Sun.','Mon.','Tues.','Wed.','Thurs.','Fri.','Sat.'][time.getDay()];
+        const description = dataObj.weather[0].description;
+
         return this.#range.createContextualFragment(
             `<div class="forecast-content">
                 <h4 class="forecast-time">${dayOfWeek} ${time.getDate()}, ${hours}:00</h4>
                 <img src="http://openweathermap.org/img/wn/${dataObj.weather[0].icon}@2x.png" alt="${dataObj.weather[0].description}" class="forecast-icon">
                 <p class="forecast-temperature" style="color: ${this.#getTemperatureColor(dataObj.main.temp)}">${Math.round(dataObj.main.temp)}ºC</p>
-                <p class="forecast-description">${dataObj.weather[0].description}</p>
+                <p class="forecast-description">${description[0].toUpperCase() + description.slice(1)}</p>
             </div>`);
     }
 
@@ -212,9 +217,10 @@ class DOMCreator {
             35ºC = red/rgb(255, 0, 0)
                 ^ dec green by 255-((temp-20)*17) ^
             20ºC = yellow/rgb(255, 255, 0)
-                ^ inc red by (temp-5)*17 ^
-            5º = blue/rgb(0, 255, 0)
-                ^ dec blue by 255-((temp+10)*17) ^
+                ^ inc red and green by (temp-5)*17 ^
+                ^ dec blue by 255-((temp-5)*17)
+            5º = blue/rgb(0, 0, 255)
+                ^ dec green by 255-((temp+10)*17) ^
             -10ºC = light blue/rgb(0, 255, 255)
                 ^ dec red by 128-((temp+25)*17/2) ^
                 ^ dec green by 255-((temp+25)*17) ^
@@ -227,11 +233,13 @@ class DOMCreator {
             } else if (temp >= 20) {
                 tempColor = `rgb(255, ${255 - Math.round((temp-20)*17)}, 0)`;
             } else if (temp >= 5) {
-                tempColor = `rgb(${Math.round((temp-5)*17)}, 255, 0)`;
+                tempColor = `rgb(${Math.round((temp-5)*17)}, ${Math.round((temp-5)*17)}, ${Math.round(255 - (temp-5)*17)})`;
             } else if (temp >= -10) {
-                tempColor = `rgb(0, 255, ${255 - Math.round((-(temp-5))*15)})`;
+                tempColor = `rgb(0, ${255 - Math.round((-(temp-5))*15)}, 255)`;
             } else if (temp >= -25) {
                 tempColor = `rgb(${Math.round(128 - ((temp+25)*17/2))}, ${Math.round(255 - ((temp+25)+17))}, 255)`;
+            } else if (temp < -25) {
+                tempColor = 'rgb(128, 0, 255)';
             }
             return tempColor;
     }
