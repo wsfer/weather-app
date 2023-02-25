@@ -46,9 +46,11 @@ header {
 }
 
 #search-box {
+    grid-column: span 2;
     display: grid;
     grid-template-columns: 1fr auto;
     align-self: center;
+    padding-left: 5rem;
 }
 
 #search-box > .input-container {
@@ -82,25 +84,6 @@ header {
     font-weight: bold;
     border-radius: 0 1rem 1rem 0;
     cursor: pointer;
-}
-
-#menu-box {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-}
-
-#menu-box button {
-    background-color: transparent;
-    border: none;
-}
-
-#menu-box svg{
-    height: 2.5rem;
-}
-
-#menu-box path {
-    fill: #d9d9d9;
 }
 
 #main-information {

@@ -15,7 +15,11 @@ document.querySelector('#search-box > button').addEventListener('click', () => {
 });
 input.addEventListener('keydown', (event) => {
     if (event.code === 'Enter') {
-        searchForACity(input.value).then((coords) => {updateWeather(...coords)});
+        searchForACity(input.value)
+            .then((coords) => {
+                input.value = '';
+                updateWeather(...coords);
+            });
     }
 });
 
