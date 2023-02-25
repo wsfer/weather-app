@@ -290,10 +290,10 @@ class DOMManager {
     #updateBackgroundImage(weather, temp) {
         let image;
         let legend;
-        if (temp >= 35) {
+        if (temp >= 37) {
             image = 'url(background-images/sun.jpg)';
             legend = '<p>Photo by <a href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">NASA</a> on <a href="https://unsplash.com/photos/JHyiw_dpALk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>'
-        } else if (temp <= -16) {
+        } else if (temp <= -25) {
             image = 'url(background-images/iceberg.jpg)';
             legend = '<p>Image by <a href="https://pixabay.com/users/358611-358611/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=404966">358611</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=404966">Pixabay</a></p>'
         } else {
