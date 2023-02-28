@@ -157,8 +157,8 @@ class DOMCreator {
                         </svg>
                         Air Quality:
                     </span>
-                    <span style="color: ${airQualityColor[airData.list[0].main.aqi+1]}">
-                         ${airQuality[airData.list[0].main.aqi+1]}
+                    <span style="color: ${airQualityColor[airData.list[0].main.aqi-1]}">
+                         ${airQuality[airData.list[0].main.aqi-1]}
                     </span>
                 </div>
             </div>`);
