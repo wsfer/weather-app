@@ -57,7 +57,7 @@ class DOMManager {
       image = 'url(background-images/iceberg.jpg)';
       legend = '<p>Image by <a href="https://pixabay.com/users/358611-358611/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=404966">358611</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=404966">Pixabay</a></p>';
     } else {
-      switch (weather) {
+      switch (weather.toLowerCase()) {
         case 'thunderstorm':
           image = 'url(background-images/thunderstorm.jpg)';
           legend = '<p>Image by <a href="https://pixabay.com/users/wkidesign-1940642/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1158027">Keli Black</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1158027">Pixabay</a></p>';
