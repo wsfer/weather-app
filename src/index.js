@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import WeatherAPI from './weather-api.js';
 import DOMManager from './dom-manager.js';
 import ForecastCarousel from './forecast-carousel.js';
