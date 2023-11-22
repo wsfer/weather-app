@@ -31,7 +31,8 @@ class ForecastCarousel {
     this.#controls.forEach((btn, index) => {
       btn.addEventListener('click', (e) => {
         // Clear current control selected style
-        this.#controls[this.#controlIndex()].style.backgroundColor = 'rgba(217, 217, 217, 0.2)';
+        this.#controls[this.#controlIndex()].style.backgroundColor =
+          'rgba(217, 217, 217, 0.2)';
         this.#index = index * 5;
 
         // Add style to the selected control
@@ -55,8 +56,10 @@ class ForecastCarousel {
 
       // this will track the control index to toggle button color
       if (this.#index % 5 === 0) {
-        this.#controls[this.#controlIndex() - 1].style.backgroundColor = 'rgba(217, 217, 217, 0.2)';
-        this.#controls[this.#controlIndex()].style.backgroundColor = 'rgba(217, 217, 217, 0.6)';
+        this.#controls[this.#controlIndex() - 1].style.backgroundColor =
+          'rgba(217, 217, 217, 0.2)';
+        this.#controls[this.#controlIndex()].style.backgroundColor =
+          'rgba(217, 217, 217, 0.6)';
       }
     }
   }
@@ -68,8 +71,10 @@ class ForecastCarousel {
 
       // this will track the control index to toggle button color
       if (this.#index % 5 === 4) {
-        this.#controls[this.#controlIndex() + 1].style.backgroundColor = 'rgba(217, 217, 217, 0.2)';
-        this.#controls[this.#controlIndex()].style.backgroundColor = 'rgba(217, 217, 217, 0.6)';
+        this.#controls[this.#controlIndex() + 1].style.backgroundColor =
+          'rgba(217, 217, 217, 0.2)';
+        this.#controls[this.#controlIndex()].style.backgroundColor =
+          'rgba(217, 217, 217, 0.6)';
       }
     }
   }

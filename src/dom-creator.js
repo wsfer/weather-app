@@ -7,16 +7,24 @@ class DOMCreator {
 
   createMainSection(data) {
     const time = new Date(data.dt * 1000);
-    const hours = (time.getHours() >= 10) ? (time.getHours()) : (`0${time.getHours()}`);
-    const minutes = (time.getMinutes() >= 10) ? (time.getMinutes()) : (`0${time.getMinutes()}`);
+    const hours =
+      time.getHours() >= 10 ? time.getHours() : `0${time.getHours()}`;
+    const minutes =
+      time.getMinutes() >= 10 ? time.getMinutes() : `0${time.getMinutes()}`;
     const { description } = data.weather[0];
 
     const DOMContent = this.#range.createContextualFragment(
-      `<h2 class="location">${data.name}, ${(data.state || data.sys.country)}</h2>
-        <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}" class="icon">
-        <h3 class="temperature" style="color:${this.#getTemperatureColor(data.main.temp)}">${Math.round(data.main.temp)}ºC</h3>
-        <p class="description">${description[0].toUpperCase() + description.slice(1)}</p>
-        <p class="update-time">Updated at ${hours}:${minutes}</p>`,
+      `<h2 class="location">${data.name}, ${data.state || data.sys.country}</h2>
+        <img src="http://openweathermap.org/img/wn/${
+          data.weather[0].icon
+        }@2x.png" alt="${data.weather[0].description}" class="icon">
+        <h3 class="temperature" style="color:${this.#getTemperatureColor(
+          data.main.temp
+        )}">${Math.round(data.main.temp)}ºC</h3>
+        <p class="description">${
+          description[0].toUpperCase() + description.slice(1)
+        }</p>
+        <p class="update-time">Updated at ${hours}:${minutes}</p>`
     );
 
     return DOMContent;
@@ -44,8 +52,7 @@ class DOMCreator {
       'rgb(255, 0, 0)',
     ];
     if (data.rain) {
-      rain = (
-        `<div>
+      rain = `<div>
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path style="path: #99b3ff" d="M9,12C9.53,12.14 9.85,12.69 9.71,13.22L8.41,18.05C8.27,18.59 7.72,18.9 7.19,18.76C6.65,18.62 6.34,18.07 6.5,17.54L7.78,12.71C7.92,12.17 8.47,11.86 9,12M13,12C13.53,12.14 13.85,12.69 13.71,13.22L11.64,20.95C11.5,21.5 10.95,21.8 10.41,21.66C9.88,21.5 9.56,20.97 9.7,20.43L11.78,12.71C11.92,12.17 12.47,11.86 13,12M17,12C17.53,12.14 17.85,12.69 17.71,13.22L16.41,18.05C16.27,18.59 15.72,18.9 15.19,18.76C14.65,18.62 14.34,18.07 14.5,17.54L15.78,12.71C15.92,12.17 16.47,11.86 17,12M17,10V9A5,5 0 0,0 12,4C9.5,4 7.45,5.82 7.06,8.19C6.73,8.07 6.37,8 6,8A3,3 0 0,0 3,11C3,12.11 3.6,13.08 4.5,13.6V13.59C5,13.87 5.14,14.5 4.87,14.96C4.59,15.43 4,15.6 3.5,15.32V15.33C2,14.47 1,12.85 1,11A5,5 0 0,1 6,6C7,3.65 9.3,2 12,2C15.43,2 18.24,4.66 18.5,8.03L19,8A4,4 0 0,1 23,12C23,13.5 22.2,14.77 21,15.46V15.46C20.5,15.73 19.91,15.57 19.63,15.09C19.36,14.61 19.5,14 20,13.72V13.73C20.6,13.39 21,12.74 21,12A2,2 0 0,0 19,10H17Z" />
@@ -55,14 +62,13 @@ class DOMCreator {
             <span class="rain">
                 ${data.rain['1h']}mm
             </span>
-        </div>`);
+        </div>`;
     } else {
       rain = '';
     }
 
     if (data.snow) {
-      snow = (
-        `<div>
+      snow = `<div>
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path style="path: #99b3ff" d="M20.79,13.95L18.46,14.57L16.46,13.44V10.56L18.46,9.43L20.79,10.05L21.31,8.12L19.54,7.65L20,5.88L18.07,5.36L17.45,7.69L15.45,8.82L13,7.38V5.12L14.71,3.41L13.29,2L12,3.29L10.71,2L9.29,3.41L11,5.12V7.38L8.5,8.82L6.5,7.69L5.92,5.36L4,5.88L4.47,7.65L2.7,8.12L3.22,10.05L5.55,9.43L7.55,10.56V13.45L5.55,14.58L3.22,13.96L2.7,15.89L4.47,16.36L4,18.12L5.93,18.64L6.55,16.31L8.55,15.18L11,16.62V18.88L9.29,20.59L10.71,22L12,20.71L13.29,22L14.7,20.59L13,18.88V16.62L15.5,15.17L17.5,16.3L18.12,18.63L20,18.12L19.53,16.35L21.3,15.88L20.79,13.95M9.5,10.56L12,9.11L14.5,10.56V13.44L12,14.89L9.5,13.44V10.56Z" />
@@ -72,7 +78,7 @@ class DOMCreator {
             <span>
                 ${data.snow['1h']}mm
             </span>
-        </div>`);
+        </div>`;
     } else {
       snow = '';
     }
@@ -98,7 +104,9 @@ class DOMCreator {
                     Wind:
                 </span>
                 <span>
-                    <svg style="width: 1rem; height: 1rem; transform: rotate(${-(data.wind.deg)}deg); margin-right: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <svg style="width: 1rem; height: 1rem; transform: rotate(${-data
+                      .wind
+                      .deg}deg); margin-right: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path style="fill: #b3b3cc" d="M14,20H10V11L6.5,14.5L4.08,12.08L12,4.16L19.92,12.08L17.5,14.5L14,11V20Z" />
                     </svg>
                 <span>
@@ -124,7 +132,13 @@ class DOMCreator {
                     Max/min:
                 </span>
                 <span>
-                    <span style="color: ${this.#getTemperatureColor(max)}">${Math.round(max)}º</span>/<span style="color: ${this.#getTemperatureColor(min)}">${Math.round(min)}º</span>
+                    <span style="color: ${this.#getTemperatureColor(
+                      max
+                    )}">${Math.round(
+                      max
+                    )}º</span>/<span style="color: ${this.#getTemperatureColor(
+                      min
+                    )}">${Math.round(min)}º</span>
                 </span>
             </div>
             <div>
@@ -160,11 +174,13 @@ class DOMCreator {
                     </svg>
                     Air Quality:
                 </span>
-                <span style="color: ${airQualityColor[airData.list[0].main.aqi - 1]}">
+                <span style="color: ${
+                  airQualityColor[airData.list[0].main.aqi - 1]
+                }">
                      ${airQuality[airData.list[0].main.aqi - 1]}
                 </span>
             </div>
-        </div>`,
+        </div>`
     );
     return DOMContent;
   }
@@ -172,9 +188,11 @@ class DOMCreator {
   createForecastSection(data) {
     const forecastFrag = document.createDocumentFragment();
 
-    data.list.map((obj) => this.#createForecastBox(obj)).forEach((element) => {
-      forecastFrag.appendChild(element);
-    });
+    data.list
+      .map((obj) => this.#createForecastBox(obj))
+      .forEach((element) => {
+        forecastFrag.appendChild(element);
+      });
 
     const DOMContent = this.#range.createContextualFragment(
       `<button id="previous">
@@ -190,7 +208,9 @@ class DOMCreator {
                 <path d="M4,10V14H13L9.5,17.5L11.92,19.92L19.84,12L11.92,4.08L9.5,6.5L13,10H4Z" />
             </svg>
         </button>
-        <div id="forecast-controls">${'<button></button>'.repeat(data.list.length / 5)}</div>`,
+        <div id="forecast-controls">${'<button></button>'.repeat(
+          data.list.length / 5
+        )}</div>`
     );
 
     DOMContent.querySelector('#forecast-container').appendChild(forecastFrag);
@@ -204,17 +224,34 @@ class DOMCreator {
 
   #createForecastBox(dataObj) {
     const time = new Date(dataObj.dt * 1000);
-    const hours = (time.getHours() >= 10) ? (time.getHours()) : (`0${time.getHours()}`);
-    const dayOfWeek = ['Sun.', 'Mon.', 'Tues.', 'Wed.', 'Thurs.', 'Fri.', 'Sat.'][time.getDay()];
+    const hours =
+      time.getHours() >= 10 ? time.getHours() : `0${time.getHours()}`;
+    const dayOfWeek = [
+      'Sun.',
+      'Mon.',
+      'Tues.',
+      'Wed.',
+      'Thurs.',
+      'Fri.',
+      'Sat.',
+    ][time.getDay()];
     const { description } = dataObj.weather[0];
 
     return this.#range.createContextualFragment(
       `<div class="forecast-content">
             <h4 class="forecast-time">${dayOfWeek} ${time.getDate()}, ${hours}:00</h4>
-            <img src="http://openweathermap.org/img/wn/${dataObj.weather[0].icon}@2x.png" alt="${dataObj.weather[0].description}" class="forecast-icon">
-            <p class="forecast-temperature" style="color: ${this.#getTemperatureColor(dataObj.main.temp)}">${Math.round(dataObj.main.temp)}ºC</p>
-            <p class="forecast-description">${description[0].toUpperCase() + description.slice(1)}</p>
-        </div>`,
+            <img src="http://openweathermap.org/img/wn/${
+              dataObj.weather[0].icon
+            }@2x.png" alt="${
+              dataObj.weather[0].description
+            }" class="forecast-icon">
+            <p class="forecast-temperature" style="color: ${this.#getTemperatureColor(
+              dataObj.main.temp
+            )}">${Math.round(dataObj.main.temp)}ºC</p>
+            <p class="forecast-description">${
+              description[0].toUpperCase() + description.slice(1)
+            }</p>
+        </div>`
     );
   }
 
@@ -232,16 +269,19 @@ class DOMCreator {
                   ^ dec green by 255-((temp+10)*17) ^
               -10ºC = light blue/rgb(0, 255, 255)
           */
-    if (temp > 50) { // Who knows where will be more than 50ºC...
+    if (temp > 50) {
+      // Who knows where will be more than 50ºC...
       tempColor = 'rgb(255, 0, 255)';
     } else if (temp >= 35) {
       tempColor = `rgb(255, 0, ${Math.round((temp - 35) * 17)})`;
     } else if (temp >= 20) {
       tempColor = `rgb(255, ${255 - Math.round((temp - 20) * 17)}, 0)`;
     } else if (temp >= 5) {
-      tempColor = `rgb(${Math.round((temp - 5) * 17)}, ${Math.round((temp - 5) * 17)}, ${Math.round(255 - (temp - 5) * 17)})`;
+      tempColor = `rgb(${Math.round((temp - 5) * 17)}, ${Math.round(
+        (temp - 5) * 17
+      )}, ${Math.round(255 - (temp - 5) * 17)})`;
     } else if (temp >= -10) {
-      tempColor = `rgb(0, ${255 - Math.round((-(temp - 5)) * 15)}, 255)`;
+      tempColor = `rgb(0, ${255 - Math.round(-(temp - 5) * 15)}, 255)`;
     } else if (temp < -10) {
       tempColor = 'rgb(0, 255, 255)';
     }

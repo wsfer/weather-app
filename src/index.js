@@ -47,8 +47,9 @@ async function updateWeather(lat, lon) {
 
 // The search function
 document.querySelector('#search-box > button').addEventListener('click', () => {
-  searchForACity(input.value)
-    .then((coords) => { updateWeather(...coords); });
+  searchForACity(input.value).then((coords) => {
+    updateWeather(...coords);
+  });
 });
 input.addEventListener('keydown', (event) => {
   if (event.code === 'Enter') {
@@ -75,14 +76,18 @@ window.addEventListener('scroll', (e) => {
 });
 
 // Try getting user location
-navigator.geolocation.getCurrentPosition((location) => {
-  const lat = location.coords.latitude;
-  const lon = location.coords.longitude;
-  updateWeather(lat, lon);
-}, (err) => {
-  // Default weather is for London
-  if (err.code === 1) {
-    searchForACity('London')
-      .then((coords) => { updateWeather(...coords); });
+navigator.geolocation.getCurrentPosition(
+  (location) => {
+    const lat = location.coords.latitude;
+    const lon = location.coords.longitude;
+    updateWeather(lat, lon);
+  },
+  (err) => {
+    // Default weather is for London
+    if (err.code === 1) {
+      searchForACity('London').then((coords) => {
+        updateWeather(...coords);
+      });
+    }
   }
-});
+);
