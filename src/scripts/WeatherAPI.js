@@ -5,7 +5,7 @@ const getCityLocations = async (cityName) => {
   const response = await fetch(endpoint);
   const data = await response.json();
   return response.ok
-    ? { cities: data, error: '' }
+    ? { cities: data, error: data.length > 0 ? '' : 'No city was found' }
     : { cities: [], error: data.message };
 };
 
