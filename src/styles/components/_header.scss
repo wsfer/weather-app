@@ -1,0 +1,106 @@
+@use '../abstracts';
+
+.header {
+  align-items: center;
+  background-color: abstracts.$light-opaque;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem 1.5rem;
+  justify-content: center;
+  padding: 1.5em;
+
+  &__title {
+    align-items: center;
+    display: flex;
+    gap: 0.5em;
+
+    > svg {
+      height: 2.5rem;
+    }
+  }
+
+  &__search-form {
+    flex-basis: 300px;
+    flex-grow: 1;
+    position: relative; // For __results list layout
+
+    &__input-container {
+      position: relative; // For SVG magnify icon layout
+      display: grid;
+      grid-template-areas:
+        'input   button'
+        'results   .   '
+        'error   error';
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr;
+      margin-left: auto;
+      max-width: 700px;
+
+      > svg {
+        height: 1.5rem;
+        left: 0.5rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &__input {
+        background-color: abstracts.$light;
+        border: none;
+        border-radius: 2em 0 0 2em;
+        color: abstracts.$dark;
+        grid-area: input;
+        padding: 0.5em 1em 0.5em 3em;
+
+        &:focus {
+          outline: 2px solid abstracts.$accent;
+        }
+      }
+
+      &__button {
+        border-radius: 0 2em 2em 0;
+        color: abstracts.$lighter;
+        cursor: pointer;
+        background-color: abstracts.$dark;
+        border: none;
+        grid-area: button;
+        padding: 0.5em 1em;
+
+        &:focus,
+        &:hover {
+          background-color: abstracts.$accent;
+          color: abstracts.$dark;
+        }
+      }
+
+      &__results {
+        background-color: abstracts.$light;
+        grid-area: results;
+        justify-self: center;
+        list-style: none;
+        position: absolute;
+        width: 80%;
+
+        &__item__button {
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0.5em 1em;
+          width: 100%;
+
+          &:focus,
+          &:hover {
+            background-color: abstracts.$accent;
+          }
+        }
+      }
+
+      &__error-box {
+        color: abstracts.$error;
+        grid-area: error;
+        margin-left: 1rem;
+        position: absolute;
+      }
+    }
+  }
+}
