@@ -1,5 +1,6 @@
 import './styles/main.scss';
 import header from './components/header';
+import footer from './components/footer';
 import updateWeather from './scripts/updateWeather';
 
 const defaultCoords = [0, 0]; // TODO: add more coords
@@ -12,6 +13,7 @@ const backgroundImageContainer = new Range()
 
 backgroundImageContainer.append(header);
 backgroundImageContainer.append(dynamicDOMContent);
+backgroundImageContainer.append(footer);
 
 document.body.appendChild(backgroundImageContainer);
 
