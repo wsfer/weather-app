@@ -1,0 +1,41 @@
+@use '../abstracts';
+
+.main-weather {
+  display: grid;
+  gap: 0.5em;
+  grid-template-areas:
+    'title       title'
+    'icon        temperature'
+    'description description'
+    'time        time';
+  @include abstracts.centralize;
+
+  &__title {
+    grid-area: title;
+    text-align: center;
+  }
+
+  &__icon {
+    grid-area: icon;
+    justify-self: right;
+    width: 7.5rem;
+  }
+
+  &__temperature {
+    align-self: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    grid-area: temperature;
+    justify-self: left;
+  }
+
+  &__description {
+    grid-area: description;
+    text-align: center;
+  }
+
+  &__update-time {
+    grid-area: time;
+    text-align: center;
+  }
+}
