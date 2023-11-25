@@ -36,7 +36,6 @@
           'time        time'
           'icon        temperature'
           'description description';
-        grid-template-columns: 1fr 1fr;
         padding: 1em;
 
         &__time {
