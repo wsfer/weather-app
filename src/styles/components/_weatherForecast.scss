@@ -1,0 +1,65 @@
+@use '../abstracts';
+
+.weather-forecast {
+  @include abstracts.centralize;
+
+  &__forecast-list {
+    display: flex;
+    gap: 1em;
+    list-style: none;
+    overflow-x: scroll;
+    padding: 1em 0;
+
+    // Scrollbar styling for firefox
+    scrollbar-color: abstracts.$light abstracts.$light-opaque;
+    scrollbar-width: thin;
+
+    // Scrollbar style for webkit browsers
+    &::-webkit-scrollbar {
+      background: abstracts.$light-opaque;
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: abstracts.$light;
+      border-radius: 1rem;
+    }
+
+    &__item {
+      flex-shrink: 0;
+
+      &__box {
+        background-color: abstracts.$light-opaque;
+        display: grid;
+        gap: 0.5em;
+        grid-template-areas:
+          'time        time'
+          'icon        temperature'
+          'description description';
+        grid-template-columns: 1fr 1fr;
+        padding: 1em;
+
+        &__time {
+          grid-area: time;
+          text-align: center;
+        }
+
+        &__icon {
+          grid-area: icon;
+        }
+
+        &__temperature {
+          align-self: center;
+          font-size: 1.2rem;
+          font-weight: bold;
+          grid-area: temperature;
+        }
+
+        &__description {
+          grid-area: description;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
