@@ -63,7 +63,7 @@ const weatherStatus = (data, airData) => {
                       main.temp_min
                     )}">${Math.round(main.temp_min)}º</span>
                 </span>
-            <li class="weather-status__list__item">
+            </li>
             <li class="weather-status__list__item">
                 <span>${SVGIcons.pressure} Pressure: </span>
                 <span>${main.pressure}hPa</span>
