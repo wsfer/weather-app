@@ -25,7 +25,8 @@ const updateWeather = async (lat, lon) => {
   const DOMWeatherStatus = weatherStatus(currentWeatherData, airData);
   const DOMWeatherForecast = weatherForecast(forecastData);
   const weather = currentWeatherData.weather[0].main;
-  const image = getWeatherImage(weather);
+  const temperature = currentWeatherData.main.temp;
+  const image = getWeatherImage(weather, temperature);
 
   dynamicDOMContent.textContent = ''; // Remove loading bar
   dynamicDOMContent.appendChild(DOMWeatherMain);
