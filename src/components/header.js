@@ -77,7 +77,7 @@ const hideSearchResults = (event) => {
 };
 
 form.addEventListener('submit', searchForACity);
-form.addEventListener('focus', () => {
+searchInput.addEventListener('focus', () => {
   errorBox.textContent = '';
 });
 document.body.addEventListener('click', hideSearchResults);
