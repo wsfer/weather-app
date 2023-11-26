@@ -1,8 +1,8 @@
-import getTemperatureColor from '../assets/getTemperatureColor';
+import getTemperatureColor from '../scripts/getTemperatureColor';
 
-const weatherMain = (data) => {
-  const { name, state, dt, weather, main } = data;
-  const { country } = data.sys;
+const weatherMain = (currentWeatherData) => {
+  const { name, state, dt, weather, main } = currentWeatherData;
+  const { country } = currentWeatherData.sys;
   const { description, icon } = weather[0];
   const time = new Date(dt * 1000);
   const hours = time.getHours() >= 10 ? time.getHours() : `0${time.getHours()}`;

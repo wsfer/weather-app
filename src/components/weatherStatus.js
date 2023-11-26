@@ -1,5 +1,5 @@
 import SVGIcons from '../assets/SVGIcons';
-import getTemperatureColor from '../assets/getTemperatureColor';
+import getTemperatureColor from '../scripts/getTemperatureColor';
 
 const weatherStatus = (data, airData) => {
   const { main, rain, snow, wind, clouds } = data;

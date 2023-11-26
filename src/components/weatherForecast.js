@@ -1,4 +1,4 @@
-import getTemperatureColor from '../assets/getTemperatureColor';
+import getTemperatureColor from '../scripts/getTemperatureColor';
 
 const createForecastBoxTemplate = (data) => {
   const { description, icon } = data.weather[0];

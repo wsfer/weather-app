@@ -6,7 +6,7 @@ import {
 import weatherMain from '../components/weatherMain';
 import weatherStatus from '../components/weatherStatus';
 import weatherForecast from '../components/weatherForecast';
-import getWeatherImage from '../assets/getWeatherImage';
+import getWeatherImage from './getWeatherImage';
 import loading from '../components/loading';
 
 // Recreate HTML sections with new weather informations

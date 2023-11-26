@@ -1,12 +1,12 @@
-import Clear from './images/clear.jpg';
-import Clouds from './images/clouds.jpg';
-import Drizzle from './images/drizzle.jpg';
-import Iceberg from './images/iceberg.jpg';
-import Mist from './images/mist.jpg';
-import Rain from './images/rain.jpg';
-import Snow from './images/snow.jpg';
-import Sun from './images/sun.jpg';
-import Thunderstorm from './images/thunderstorm.jpg';
+import Clear from '../assets/images/clear.jpg';
+import Clouds from '../assets/images/clouds.jpg';
+import Drizzle from '../assets/images/drizzle.jpg';
+import Iceberg from '../assets/images/iceberg.jpg';
+import Mist from '../assets/images/mist.jpg';
+import Rain from '../assets/images/rain.jpg';
+import Snow from '../assets/images/snow.jpg';
+import Sun from '../assets/images/sun.jpg';
+import Thunderstorm from '../assets/images/thunderstorm.jpg';
 
 const getWeatherImage = (weather, temperature) => {
   if (temperature >= 37) {

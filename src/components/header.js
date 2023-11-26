@@ -1,4 +1,4 @@
-import getFlagEmoji from '../assets/getFlagEmoji';
+import getFlagEmoji from '../scripts/getFlagEmoji';
 import SVGIcons from '../assets/SVGIcons';
 import updateWeather from '../scripts/updateWeather';
 import { getCityLocations } from '../scripts/WeatherAPI';
