@@ -8,11 +8,10 @@
     gap: 1em;
     list-style: none;
     overflow-x: scroll;
-    padding: 1em 0;
+    padding: 1em 0 2em;
 
     // Scrollbar styling for firefox
     scrollbar-color: abstracts.$light abstracts.$light-opaque;
-    scrollbar-width: thin;
 
     // Scrollbar style for webkit browsers
     &::-webkit-scrollbar {
