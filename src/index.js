@@ -4,7 +4,18 @@ import footer from './components/footer';
 import loading from './components/loading';
 import updateWeather from './scripts/updateWeather';
 
-const defaultCoords = [0, 0]; // TODO: add more coords
+const defaultCoords = [
+  [51.5073219, -0.1276474],
+  [48.8588897, 2.3200410217200766],
+  [-33.8698439, 151.2082848],
+  [43.6534817, -79.3839347],
+  [-23.5506507, -46.6333824],
+  [30.0443879, 31.2357257],
+  [-34.6075682, -58.4370894],
+  [52.5170365, 13.3888599],
+  [13.7524938, 100.4935089],
+  [40.7127281, -74.0060152],
+];
 const dynamicDOMContent = new Range()
   .createContextualFragment('<div class="js-content content"></div>')
   .querySelector('div');
@@ -26,6 +37,8 @@ navigator.geolocation.getCurrentPosition(
     updateWeather(latitude, longitude);
   },
   () => {
-    updateWeather(...defaultCoords);
+    const randomIndex = Math.floor(Math.random() * defaultCoords.length);
+    const randomCoords = defaultCoords[randomIndex];
+    updateWeather(...randomCoords);
   }
 );
