@@ -4,8 +4,9 @@ import updateWeather from '../scripts/updateWeather';
 import { getCityLocations } from '../scripts/WeatherAPI';
 
 // Header takes care of city search and is static (never changes or is recreated)
-const header = new Range().createContextualFragment(
-  `<header class="header">
+const header = new Range()
+  .createContextualFragment(
+    `<header class="header">
         <h1 class="header__title">${SVGIcons.tornado} Weather</h1>
         <form class="js-search-form header__search-form">
             <label
@@ -27,7 +28,8 @@ const header = new Range().createContextualFragment(
             </div>
         </form>
     </header>`
-);
+  )
+  .querySelector('header');
 
 const form = header.querySelector('.js-search-form');
 const searchInput = header.querySelector('.js-search-input');
@@ -66,9 +68,18 @@ const searchForACity = async (event) => {
   errorBox.textContent = searchAttempt.error; // Empty string on success
 };
 
+const hideSearchResults = (event) => {
+  const { target } = event;
+  const searchForm = header.querySelector('.js-search-form');
+  if (!searchForm.contains(target)) {
+    cityList.textContent = '';
+  }
+};
+
 form.addEventListener('submit', searchForACity);
 form.addEventListener('focus', () => {
   errorBox.textContent = '';
 });
+document.body.addEventListener('click', hideSearchResults);
 
 export default header;
