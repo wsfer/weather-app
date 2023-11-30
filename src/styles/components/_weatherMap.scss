@@ -1,0 +1,19 @@
+@use '../abstracts';
+
+.weather-map {
+  @include abstracts.centralize;
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__map {
+    aspect-ratio: 3 / 2;
+
+    &__legend {
+      background-color: abstracts.$lighter;
+      color: abstracts.$darker;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
