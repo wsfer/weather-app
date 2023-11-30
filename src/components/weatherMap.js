@@ -2,17 +2,8 @@ import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import createMapLayers from '../scripts/createMapLayers';
 import 'leaflet/dist/leaflet.css';
-
-const API_KEY = '53adf48f9adafdb91a2ae308a53f4cbd';
-const OPEN_STREET_MAP = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-const WEATHER_PRECIPITATION = `https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${API_KEY}`;
-const WEATHER_TMPERATURE = `https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${API_KEY}`;
-const WEATHER_CLOUDS = `https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${API_KEY}`;
-const WEATHER_WIND = `https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${API_KEY}`;
-const WEATHER_PRESSURE = `https://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=${API_KEY}`;
-const ATTRIBUITION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a><span aria-hidden="true"> | </span><a href="https://openweathermap.org/">OpenWeather</a>';
 
 // This fix missing marker icon
 const defaultIcon = L.icon({
@@ -27,69 +18,9 @@ const defaultIcon = L.icon({
   tooltipAnchor: [16, -28],
 });
 
-// Layers
-const baseLayer = L.tileLayer(OPEN_STREET_MAP, { attribution: ATTRIBUITION });
-const precipitationLayer = L.tileLayer(WEATHER_PRECIPITATION);
-const temperatureLayer = L.tileLayer(WEATHER_TMPERATURE);
-const cloudsLayer = L.tileLayer(WEATHER_CLOUDS);
-const windLayer = L.tileLayer(WEATHER_WIND);
-const pressureLayer = L.tileLayer(WEATHER_PRESSURE);
-
-// Legends - TODO: add html content
-const precipitationLegend = L.control({ position: 'bottomright' });
-precipitationLegend.onAdd = () => {
-  const div = L.DomUtil.create('div', 'weather-map__map__legend');
-  div.innerHTML = 'precipitation';
-  return div;
-};
-
-const temperatureLegend = L.control({ position: 'bottomright' });
-temperatureLegend.onAdd = () => {
-  const div = L.DomUtil.create('div', 'weather-map__map__legend');
-  div.innerHTML = 'temperature';
-  return div;
-};
-
-const cloudsLegend = L.control({ position: 'bottomright' });
-cloudsLegend.onAdd = () => {
-  const div = L.DomUtil.create('div', 'weather-map__map__legend');
-  div.innerHTML = 'clouds';
-  return div;
-};
-
-const windLegend = L.control({ position: 'bottomright' });
-windLegend.onAdd = () => {
-  const div = L.DomUtil.create('div', 'weather-map__map__legend');
-  div.innerHTML = 'wind';
-  return div;
-};
-
-const pressureLegend = L.control({ position: 'bottomright' });
-pressureLegend.onAdd = () => {
-  const div = L.DomUtil.create('div', 'weather-map__map__legend');
-  div.innerHTML = 'pressure';
-  return div;
-};
-
-// Used when changing layers to change legend together
-const layerToLegend = new Map([
-  [precipitationLayer, precipitationLegend],
-  [temperatureLayer, temperatureLegend],
-  [cloudsLayer, cloudsLegend],
-  [windLayer, windLegend],
-  [pressureLayer, pressureLegend],
-  ['current', precipitationLegend], // Also stores current active legend
-]);
-
-const weatherLayers = {
-  Precipitation: precipitationLayer,
-  Temperature: temperatureLayer,
-  Clouds: cloudsLayer,
-  Wind: windLayer,
-  Pressure: pressureLayer,
-};
-
 const weatherMap = (lat, lon) => {
+  let currentLegend;
+  const { baseLayer, weatherLayers, legends } = createMapLayers();
   const DOMContent = new Range().createContextualFragment(
     `<section class="weather-map">
       <h2 class="weather-map__title">Weather Map</h2>
@@ -104,23 +35,23 @@ const weatherMap = (lat, lon) => {
     center: [lat, lon],
     zoom: 10,
     minZoom: 3,
-    layers: [baseLayer, precipitationLayer],
+    layers: [baseLayer, weatherLayers.precipitation],
     maxBounds: bounds, // Don't allow user to go out of map borders
     maxBoundsViscosity: 1,
   });
 
   L.control.layers(weatherLayers, null, { collapsed: false }).addTo(map);
   L.marker([lat, lon], { icon: defaultIcon }).addTo(map);
-  precipitationLegend.addTo(map);
+  legends.precipitation.addTo(map);
+  currentLegend = legends.precipitation;
 
   // Change legend based on selected layer
   map.on('baselayerchange', (event) => {
-    const { layer } = event;
-    const currentLegend = layerToLegend.get('current');
-    const newLegend = layerToLegend.get(layer);
+    const { name } = event;
+    const newLegend = legends[name];
     map.removeControl(currentLegend);
     map.addControl(newLegend);
-    layerToLegend.set('current', newLegend);
+    currentLegend = newLegend;
   });
 
   // Allows leaflet to recalculate map size after it's rendered on DOM, avoiding some bugs
