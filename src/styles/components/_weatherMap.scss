@@ -20,9 +20,10 @@
       padding: 0.5em;
 
       &__values {
-        display: flex;
+        display: grid;
         gap: 1em;
-        justify-content: space-between;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
       }
 
       &__scale {
