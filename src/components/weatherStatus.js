@@ -46,7 +46,9 @@ const weatherStatus = (data, airData) => {
             </li>
             <li class="weather-status__list__item">
                 <span>${SVGIcons.wind} Wind: </span>
-                <span>${SVGIcons.windArrow(wind.deg)} ${wind.speed}mph</span>
+                <span>
+                  ${SVGIcons.windArrow(wind.deg + 180)} ${wind.speed}mph
+                </span>
             </li>
             <li class="weather-status__list__item">
                 <span>${SVGIcons.cloud} Cloudiness: </span>
